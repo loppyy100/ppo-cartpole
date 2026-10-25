@@ -14,8 +14,8 @@ from stable_baselines3.common.callbacks import BaseCallback
 from stable_baselines3.common.monitor import Monitor
 from stable_baselines3.common.vec_env import DummyVecEnv
 
-# How long to train. 100k steps takes ~2-4 minutes on CPU.
-TOTAL_STEPS = int(os.environ.get("RL_DEMO_TIMESTEPS", "100000"))
+# How long to train. 200k steps takes a few minutes on CPU.
+TOTAL_STEPS = int(os.environ.get("RL_DEMO_TIMESTEPS", "200000"))
 
 OUT_DIR = os.path.dirname(os.path.abspath(__file__))
 
@@ -144,7 +144,7 @@ def main():
                    duration=33, loop=0)
     print(f"         Saved: {gif_path}")
     print("=" * 55)
-    print(" DONE! Show your teacher: learning_curve.png + trained_agent.gif")
+    print(" Done: saved learning_curve.png and trained_agent.gif")
     print("=" * 55)
 
 
