@@ -4,7 +4,7 @@ A PPO (Proximal Policy Optimization) agent learns to balance a pole on a cart, u
 [Stable-Baselines3](https://stable-baselines3.readthedocs.io/) and
 [Gymnasium](https://gymnasium.farama.org/) `CartPole-v1`. Trained on CPU only.
 
-![trained agent](trained_agent.gif)
+![trained agent](ppo%20project/trained_agent.gif)
 
 ## Result
 
@@ -15,9 +15,9 @@ A PPO (Proximal Policy Optimization) agent learns to balance a pole on a cart, u
 
 CartPole-v1 counts as solved at an average of 475.
 
-![learning curve](learning_curve.png)
+![learning curve](ppo%20project/learning_curve.png)
 
-## What `ppo.py` does
+## What `ppo project/ppo.py` does
 
 1. Builds the environment (wrapped in `Monitor` + `DummyVecEnv`)
 2. Trains PPO (`MlpPolicy`, lr 3e-4, n_steps 1024, batch 256, gamma 0.99, seed 42)
@@ -27,18 +27,32 @@ CartPole-v1 counts as solved at an average of 475.
 
 ```bash
 pip install stable-baselines3 gymnasium matplotlib pillow
+cd "ppo project"
 python ppo.py                          # 200k steps
 RL_DEMO_TIMESTEPS=50000 python ppo.py  # quicker run
 ```
 
-## `exercises/`
+## `self learning/`
 
-My step-by-step warm-up before the full script:
+My step-by-step lessons, typed by hand.
 
+**CartPole**
 - `rl.py`: look at the observation/action spaces and play with a random policy (scores 9–32)
 - `brain.py`: train PPO for 50k steps (mean episode reward went 23 → 393) and save it
 - `watch.py`: load the saved model and watch it play
 
+**Ant (MuJoCo `Ant-v5`)**: 105 observations, 8 continuous motor actions
+- `ant.py`: inspect the spaces and watch a random policy flail (and flip over)
+- `ant_brain.py`: train PPO (`MlpPolicy`) for 1M steps, saved as `my_ant_brain.zip`
+- `ant_watch.py`: load the brain and watch it run
+
+| Ant-v5, PPO | Mean episode reward | Mean episode length (max 1000) |
+|---|---|---|
+| 300k steps | 127 | 304 |
+| 1M steps (~10 min on CPU) | **865** | 541 |
+
+The Ant's reward mostly pays for forward speed, so the trained agent learned to sprint.
+
 ## Next
 
-Continuous control (MuJoCo), then a quadruped gait, working toward a robot dog climbing stairs.
+A real quadruped: the Unitree Go1 model (MuJoCo Menagerie) learning to walk, working toward a robot dog climbing stairs.
